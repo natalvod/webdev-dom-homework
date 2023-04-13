@@ -43,10 +43,11 @@ export const getFetchPromise = () => {
 
 export const renderComments = () => {
   const commentHtml = comments.map((comment, index) => {
+    const createDate = format(new Date(comment.date), 'yyyy-MM-dd hh.mm.ss');
     return `<li class="comment" data-name='${comment.name}' data-comment='${comment.text}'>
   <div class="comment-header">
     <div>${comment.name}</div>
-    <div>${myDate(new Date(comment.date))}</div>
+    <div>${createDate}</div>
   </div>
   <div class="comment-body">
 
@@ -79,7 +80,7 @@ export const renderComments = () => {
   ${commentHtml}
   </ul>
   <div class="add-form">
-    <input
+    <input 
       type="text"
       class="add-form-name"
       placeholder="Введите ваше имя"
@@ -123,7 +124,7 @@ export const renderComments = () => {
   buttonElement.addEventListener('click', () => {
     inputNameElement.classList.remove('error');
     textareaElement.classList.remove('error')
-    if (!inputNameElement.value || !textareaElement.value) {
+    if (!textareaElement.value) {
       inputNameElement.classList.add('error');
       textareaElement.classList.add('error');
       return;
@@ -279,7 +280,7 @@ export const renderComments = () => {
   };
 
   const validateButton = () => {
-    if (!inputNameElement.value || !textareaElement.value) {
+    if (!textareaElement.value) {
       buttonElement.disabled = true;
     } else buttonElement.disabled = false;
   }
